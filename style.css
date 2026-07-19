@@ -123,6 +123,11 @@ body {
     100% { transform: rotate(360deg); }
 }
 
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
 .logo-text h1 {
     font-size: 1.4rem;
     font-weight: 700;
@@ -136,6 +141,14 @@ body {
     font-size: 0.75rem;
     color: var(--text-secondary);
     letter-spacing: 1px;
+}
+
+.logo-built-by {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+    margin-top: 0.15rem;
+    font-weight: 500;
 }
 
 .header-actions {
