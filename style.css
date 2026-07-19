@@ -1,0 +1,1071 @@
+/* 
+ * Quantum Odyssey - Custom Styling System
+ * Futuristic Sci-Fi/Cyberpunk theme using Glassmorphic panels, CSS variables, and neon accents.
+ */
+
+:root {
+    --bg-app: #08090d;
+    --bg-card: rgba(15, 20, 30, 0.9);
+    --bg-card-hover: rgba(22, 28, 40, 0.95);
+    --border-color: rgba(255, 255, 255, 0.08);
+    --border-color-glow: rgba(79, 70, 229, 0.25);
+    
+    /* Colors */
+    --cyan: #4f46e5;
+    --cyan-glow: rgba(79, 70, 229, 0.1);
+    --purple: #6d28d9;
+    --purple-glow: rgba(109, 40, 217, 0.1);
+    --pink: #0ea5e9;
+    --pink-glow: rgba(14, 165, 233, 0.1);
+    --gold: #f59e0b;
+    --gold-glow: rgba(245, 158, 11, 0.1);
+    
+    /* Gate Colors */
+    --gate-h: #059669;
+    --gate-pauli: #2563eb;
+    --gate-ctrl: #7c3aed;
+    --gate-measure: #dc2626;
+    --gate-phase: #d97706;
+    
+    /* Text Colors */
+    --text-primary: #f8f9fa;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    
+    /* Fonts */
+    --font-ui: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-code: 'Fira Code', monospace;
+    
+    /* Shadows */
+    --shadow-neon-cyan: 0 4px 12px rgba(79, 70, 229, 0.08);
+    --shadow-neon-purple: 0 4px 12px rgba(109, 40, 217, 0.08);
+    --shadow-glass: 0 4px 20px 0 rgba(0, 0, 0, 0.4);
+    
+    /* Transitions */
+    --transition-smooth: all 0.2s ease;
+}
+
+/* --- Base Rules --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-app);
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(123, 44, 191, 0.08) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(0, 245, 255, 0.08) 0px, transparent 50%),
+        radial-gradient(at 50% 100%, rgba(255, 0, 127, 0.05) 0px, transparent 50%);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    overflow-x: hidden;
+    line-height: 1.5;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: rgba(7, 9, 14, 0.9);
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--cyan);
+    box-shadow: 0 0 8px var(--cyan);
+}
+
+/* --- Layout Grid --- */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 1.2rem;
+    gap: 1.2rem;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* --- Header --- */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: var(--shadow-glass);
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.logo-icon {
+    font-size: 2.2rem;
+    color: var(--cyan);
+    animation: rotateAtom 20s linear infinite;
+}
+
+@keyframes rotateAtom {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.logo-text h1 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, var(--text-primary) 30%, var(--cyan) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.logo-tagline {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.system-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+}
+
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.status-indicator.online {
+    background-color: #10b981;
+    box-shadow: 0 0 8px #10b981;
+    animation: statusPulse 2s infinite;
+}
+
+@keyframes statusPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+.status-lbl {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.qubit-select {
+    background: transparent;
+    border: none;
+    color: var(--cyan);
+    font-family: var(--font-ui);
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    padding: 0 4px;
+}
+
+.qubit-select option {
+    background-color: var(--bg-app);
+    color: var(--text-primary);
+}
+
+/* --- Main Layout --- */
+.app-layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 1.2rem;
+}
+
+@media (max-width: 1024px) {
+    .app-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- Cards (Glassmorphism) --- */
+.card {
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.2rem;
+    box-shadow: var(--shadow-glass);
+    transition: var(--transition-smooth);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.card:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.card-header h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-primary);
+}
+
+.card-header h2 i {
+    font-size: 1rem;
+}
+
+.card-desc {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 0.2rem;
+}
+
+/* Icon Gradient Accents */
+.icon-blue { color: var(--cyan); }
+.icon-purple { color: var(--purple); }
+.icon-pink { color: var(--pink); }
+
+/* --- Sidebar --- */
+.sidebar-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+/* --- Gate Toolbox --- */
+.gates-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+}
+
+.gate-draggable {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 0.6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+    transition: var(--transition-smooth);
+}
+
+.gate-draggable:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--cyan);
+    box-shadow: var(--shadow-neon-cyan);
+    transform: translateY(-2px);
+}
+
+.gate-draggable:active {
+    cursor: grabbing;
+}
+
+.gate-lbl {
+    font-size: 1.2rem;
+    font-weight: 700;
+    font-family: var(--font-ui);
+    color: var(--text-primary);
+}
+
+.gate-draggable[data-gate="H"] .gate-lbl { color: var(--gate-h); }
+.gate-draggable[data-gate="X"] .gate-lbl,
+.gate-draggable[data-gate="Y"] .gate-lbl,
+.gate-draggable[data-gate="Z"] .gate-lbl { color: var(--gate-pauli); }
+.gate-draggable[data-gate="CNOT"] .gate-lbl,
+.gate-draggable[data-gate="CZ"] .gate-lbl,
+.gate-draggable[data-gate="SWAP"] .gate-lbl { color: var(--gate-ctrl); }
+.gate-draggable[data-gate="MEASURE"] .gate-lbl { color: var(--gate-measure); }
+.gate-draggable[data-gate="S"] .gate-lbl,
+.gate-draggable[data-gate="T"] .gate-lbl { color: var(--gate-phase); }
+
+.gate-sub {
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    margin-top: 0.15rem;
+    text-align: center;
+}
+
+/* --- Presets & Quests --- */
+.presets-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.quest-dropdown-container {
+    width: 100%;
+    margin-bottom: 0.6rem;
+}
+
+.active-quest-panel {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    display: flex;
+    gap: 0.8rem;
+    align-items: flex-start;
+    transition: var(--transition-smooth);
+}
+
+.active-quest-panel.completed {
+    border-color: rgba(16, 185, 129, 0.4);
+    background: rgba(16, 185, 129, 0.03);
+}
+
+.active-quest-panel .quest-status-icon {
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.active-quest-panel.completed .quest-status-icon {
+    color: #10b981;
+}
+
+.preset-item {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    color: var(--text-primary);
+    border-radius: 8px;
+    padding: 0.7rem 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-family: var(--font-ui);
+    transition: var(--transition-smooth);
+    width: 100%;
+    text-align: left;
+}
+
+.preset-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--purple);
+    box-shadow: var(--shadow-neon-purple);
+    transform: translateX(4px);
+}
+
+.preset-name {
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.preset-item i {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    transition: var(--transition-smooth);
+}
+
+.preset-item:hover i {
+    color: var(--purple);
+}
+
+/* Quests */
+.quest-item {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 8px;
+    padding: 0.7rem 0.9rem;
+    display: flex;
+    gap: 0.8rem;
+    align-items: flex-start;
+    transition: var(--transition-smooth);
+    cursor: pointer;
+}
+
+.quest-item:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+.quest-item.completed {
+    border-color: rgba(16, 185, 129, 0.4);
+    background: rgba(16, 185, 129, 0.03);
+}
+
+.quest-status-icon {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-top: 0.1rem;
+}
+
+.quest-item.completed .quest-status-icon {
+    color: #10b981;
+}
+
+.quest-details {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.quest-header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.quest-solution-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: var(--transition-smooth);
+    padding: 0 4px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quest-solution-btn:hover {
+    color: var(--gold);
+    background: rgba(255, 215, 0, 0.1);
+}
+
+.quest-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.quest-desc {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    margin-top: 0.1rem;
+}
+
+.quest-item.completed .quest-title {
+    text-decoration: line-through;
+    color: var(--text-secondary);
+}
+
+/* --- Main content panel --- */
+.main-content-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+/* --- Circuit Workspace Card --- */
+.circuit-workspace-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.2rem;
+    box-shadow: var(--shadow-glass);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.workspace-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 0.6rem;
+}
+
+.workspace-title {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.workspace-title h2 {
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+
+.workspace-badge {
+    font-size: 0.65rem;
+    background: rgba(0, 245, 255, 0.15);
+    color: var(--cyan);
+    border: 1px solid var(--border-color-glow);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.circuit-tip {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+/* --- Circuit Grid --- */
+.circuit-grid-container {
+    position: relative;
+    padding: 0.8rem 0;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    min-height: 200px;
+    user-select: none;
+}
+
+.circuit-row {
+    position: relative;
+    height: 64px;
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    align-items: center;
+}
+
+.qubit-label {
+    width: 50px;
+    text-align: center;
+    font-family: var(--font-code);
+    font-weight: 600;
+    color: var(--text-secondary);
+    z-index: 2;
+}
+
+.qubit-label span {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+.wire-line {
+    position: absolute;
+    left: 50px;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 2px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.05) 100%);
+    z-index: 1;
+}
+
+.cells-container {
+    display: grid;
+    height: 100%;
+    margin-left: 20px;
+    margin-right: 20px;
+    gap: 4px;
+    z-index: 2;
+}
+
+.circuit-cell {
+    position: relative;
+    height: 100%;
+    border-left: 1px dashed rgba(255, 255, 255, 0.03);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+}
+
+.circuit-cell.drag-hover {
+    background: rgba(0, 245, 255, 0.05);
+    border: 1.5px dashed var(--cyan);
+}
+
+.circuit-canvas-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 3;
+}
+
+/* --- Gate Blocks on Wires --- */
+.gate-block {
+    width: 38px;
+    height: 38px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    transition: var(--transition-smooth);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--text-primary);
+}
+
+.gate-block:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 12px currentColor;
+    filter: brightness(1.1);
+}
+
+.gate-block:hover::after {
+    content: "×";
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: #ef4444;
+    color: white;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    font-size: 8px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Gate Specific Colors */
+.gate-h { background-color: var(--gate-h); box-shadow: 0 0 10px rgba(16, 185, 129, 0.2); }
+.gate-x { background-color: var(--gate-pauli); box-shadow: 0 0 10px rgba(59, 130, 246, 0.2); }
+.gate-y { background-color: #38bdf8; box-shadow: 0 0 10px rgba(56, 189, 248, 0.2); }
+.gate-z { background-color: #1e3a8a; box-shadow: 0 0 10px rgba(30, 58, 138, 0.2); }
+.gate-s { background-color: var(--gate-phase); box-shadow: 0 0 10px rgba(245, 158, 11, 0.2); }
+.gate-t { background-color: #b45309; box-shadow: 0 0 10px rgba(180, 83, 9, 0.2); }
+.gate-measure { background-color: var(--gate-measure); box-shadow: 0 0 10px rgba(239, 68, 68, 0.2); }
+
+/* Control & Target endpoints for CNOT / CZ / SWAP */
+.gate-cnot_ctrl, .gate-cz_ctrl, .gate-cz_tgt {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: var(--cyan);
+    box-shadow: 0 0 8px var(--cyan);
+    font-size: 0; /* hide label */
+    border: none;
+}
+.gate-cnot_ctrl {
+    background-color: var(--purple);
+    box-shadow: 0 0 8px var(--purple);
+}
+
+.gate-cnot_tgt {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: var(--purple);
+    box-shadow: 0 0 10px var(--purple);
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.gate-swap {
+    width: 18px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    color: var(--pink);
+    font-size: 1.4rem;
+}
+.gate-swap:hover::after {
+    top: -2px;
+    right: -2px;
+}
+
+.gate-ccnot_ctrl {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: var(--purple);
+    box-shadow: none;
+    font-size: 0;
+    border: none;
+}
+
+.gate-ccnot_tgt {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: var(--purple);
+    box-shadow: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.gate-rx { background-color: var(--gate-pauli); }
+.gate-ry { background-color: #38bdf8; }
+.gate-rz { background-color: #1e3a8a; }
+
+/* --- Analysis Grid --- */
+.analysis-grid {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 1.2rem;
+}
+
+@media (max-width: 900px) {
+    .analysis-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- Bloch sphere --- */
+.bloch-canvas-container {
+    width: 100%;
+    height: 220px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: grab;
+}
+
+.bloch-canvas-container:active {
+    cursor: grabbing;
+}
+
+#bloch-canvas {
+    background: transparent;
+}
+
+.flex-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.qubit-selector {
+    display: flex;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    padding: 0.2rem;
+    border-radius: 6px;
+    gap: 0.15rem;
+}
+
+.radio-label {
+    cursor: pointer;
+}
+
+.radio-label input {
+    display: none;
+}
+
+.radio-label span {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 4px;
+    transition: var(--transition-smooth);
+    color: var(--text-secondary);
+    font-family: var(--font-code);
+}
+
+.radio-label input:checked + span {
+    background-color: var(--cyan);
+    color: #ffffff;
+}
+
+.bloch-coordinates {
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    padding-top: 0.6rem;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.mono-txt {
+    font-family: var(--font-code);
+    font-weight: 500;
+    color: var(--cyan);
+}
+
+/* --- State Analysis Grid (Circle Phasors & Probability Bars) --- */
+.quantum-state-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.8rem;
+    flex-grow: 1;
+}
+
+@media (max-width: 600px) {
+    .quantum-state-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.state-item {
+    background: rgba(255, 255, 255, 0.015);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    padding: 0.7rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    transition: var(--transition-smooth);
+}
+
+.state-item:hover {
+    border-color: rgba(123, 44, 191, 0.25);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.state-lbl-label {
+    font-family: var(--font-code);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+/* Phasor Circle CSS representation */
+.phasor-container {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px dashed rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.phasor-fill {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--purple) 0%, rgba(123, 44, 191, 0.6) 100%);
+    box-shadow: 0 0 8px rgba(123, 44, 191, 0.4);
+    width: 0px; /* modified dynamically */
+    height: 0px;
+    transition: width 0.15s ease-out, height 0.15s ease-out;
+}
+
+.phasor-hand {
+    position: absolute;
+    width: 1px;
+    height: 24px;
+    background: linear-gradient(to top, transparent 40%, var(--cyan) 100%);
+    bottom: 50%;
+    left: calc(50% - 0.5px);
+    transform-origin: bottom center;
+    transition: transform 0.15s ease-out;
+}
+
+.phasor-dot {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+    top: 0;
+    left: calc(50% - 2px);
+}
+
+.probability-bar-container {
+    width: 100%;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 0.2rem;
+}
+
+.probability-bar {
+    height: 100%;
+    width: 0%; /* modified dynamically */
+    background: linear-gradient(90deg, var(--purple) 0%, var(--pink) 100%);
+    border-radius: 3px;
+    transition: width 0.2s ease-out;
+}
+
+.probability-value {
+    font-size: 0.7rem;
+    font-family: var(--font-code);
+    color: var(--text-secondary);
+}
+
+/* --- Code Export Card --- */
+.code-export-card {
+    margin-top: 0.4rem;
+}
+
+.tabs {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.tab-btn {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 0.4rem 0.9rem;
+    font-size: 0.75rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: var(--font-ui);
+    font-weight: 500;
+    transition: var(--transition-smooth);
+}
+
+.tab-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+}
+
+.tab-btn.active {
+    background: var(--pink);
+    border-color: var(--pink);
+    color: #ffffff;
+}
+
+.code-editor-container {
+    background: #040508;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+}
+
+#code-output {
+    font-family: var(--font-code);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    display: block;
+    background: transparent;
+    border: none;
+    resize: vertical;
+    width: 100%;
+    height: 140px;
+    outline: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* --- Buttons & Inputs --- */
+.btn {
+    background: var(--cyan);
+    color: #ffffff;
+    border: 1px solid var(--cyan);
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: var(--transition-smooth);
+}
+
+.btn:hover {
+    background: transparent;
+    color: var(--cyan);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-primary);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-primary);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: none;
+}
+
+.btn-icon {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.btn-icon:hover {
+    color: var(--cyan);
+    border-color: var(--cyan);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.preset-dropdown-container {
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+    width: 100%;
+}
+
+.preset-select {
+    flex-grow: 1;
+    min-width: 0;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    outline: none;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.preset-select:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.preset-select option, .preset-select optgroup {
+    background-color: var(--bg-app);
+    color: var(--text-primary);
+}
+
+.btn-primary {
+    background: var(--pink);
+    color: #ffffff;
+    border-color: var(--pink);
+}
+
+.btn-primary:hover {
+    background: transparent;
+    color: var(--pink);
+    border-color: var(--pink);
+}

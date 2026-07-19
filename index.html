@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Odyssey | Interactive Quantum Simulator & Visualizer</title>
+    <meta name="description" content="An interactive quantum computing playground, visualizer, and simulator featuring a drag-and-drop circuit builder, real-time math execution, 3D Bloch sphere, and game-like learning quests.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for UI icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- HEADER -->
+        <header class="app-header">
+            <div class="header-logo">
+                <i class="fa-solid fa-atom logo-icon"></i>
+                <div class="logo-text">
+                    <h1>QUANTUM ODYSSEY</h1>
+                    <span class="logo-tagline">Interactive Simulator & Qubit Sandbox</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button id="btn-reset" class="btn btn-secondary">
+                    <i class="fa-solid fa-rotate-left"></i> Reset Circuit
+                </button>
+                <div class="system-status">
+                    <span class="status-indicator online"></span>
+                    <span class="status-lbl">Simulator Active:</span>
+                    <select id="select-qubits" class="qubit-select">
+                        <option value="1">1 Qubit</option>
+                        <option value="2">2 Qubits</option>
+                        <option value="3" selected>3 Qubits</option>
+                        <option value="4">4 Qubits</option>
+                        <option value="5">5 Qubits</option>
+                    </select>
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN LAYOUT -->
+        <main class="app-layout">
+            
+            <!-- LEFT PANEL: SIDEBAR (Gates, Preloads, Quests) -->
+            <section class="sidebar-panel">
+                <!-- GATE TOOLBOX -->
+                <div class="card toolbox-card">
+                    <div class="card-header">
+                        <h2><i class="fa-solid fa-toolbox icon-blue"></i> Gate Toolbox</h2>
+                        <p class="card-desc">Drag gates onto qubit wires below</p>
+                    </div>
+                    <div class="gates-grid">
+                        <div class="gate-draggable" draggable="true" data-gate="H" title="Hadamard: Creates equal superposition (|+⟩ state)">
+                            <div class="gate-lbl">H</div>
+                            <span class="gate-sub">Hadamard</span>
+                        </div>
+                        <div class="gate-draggable" draggable="true" data-gate="X" title="Pauli-X: Bitflip (equivalent to classical NOT)">
+                            <div class="gate-lbl">X</div>
+                            <span class="gate-sub">Bit-Flip</span>
+                        </div>
+                        <div class="gate-draggable" draggable="true" data-gate="Y" title="Pauli-Y: Bit and phase flip">
+                            <div class="gate-lbl">Y</div>
+                            <span class="gate-sub">Y-Gate</span>
+                        </div>
+                        <div class="gate-draggable" draggable="true" data-gate="Z" title="Pauli-Z: Phase-flip (flips sign of |1⟩ amplitude)">
+                            <div class="gate-lbl">Z</div>
+                            <span class="gate-sub">Phase-Flip</span>
+                        </div>
+                        <div class="gate-draggable" draggable="true" data-gate="S" title="Phase Gate (S): Rotation of PI/2 around Z-axis">
+                            <div class="gate-lbl">S</div>
+                            <span class="gate-sub">π/2 Phase</span>
+                        </div>
+                        <div class="gate-draggable" draggable="true" data-gate="T" title="T Gate: Rotation of PI/4 around Z-axis">
+                            <div class="gate-lbl">T</div>
+                            <span class="gate-sub">π/4 Phase</span>
+                        </div>
+                        <div class="gate-draggable" draggable="true" data-gate="CNOT" title="CNOT: Controlled-NOT entangles two qubits">
+                            <div class="gate-lbl">CNOT</div>
+                            <span class="gate-sub">Ctrl-NOT</span>
+                        </div>
+                        <div class="gate-draggable" draggable="true" data-gate="CZ" title="Controlled-Z: Phase flip on target if control is |1⟩">
+                            <div class="gate-lbl">CZ</div>
+                            <span class="gate-sub">Ctrl-Z</span>
+                        </div>
+                        <div class="gate-draggable" draggable="true" data-gate="SWAP" title="SWAP: Swaps states of two qubits">
+                            <div class="gate-lbl">SWAP</div>
+                            <span class="gate-sub">Swap State</span>
+                        </div>
+                        <div class="gate-draggable" draggable="true" data-gate="CCNOT" title="Toffoli (CCNOT): Controlled-Controlled-NOT gate">
+                            <div class="gate-lbl">CCNOT</div>
+                            <span class="gate-sub">Toffoli</span>
+                        </div>
+                        <div class="gate-draggable" draggable="true" data-gate="RX" title="RX Gate: Parameterized rotation around X-axis">
+                            <div class="gate-lbl">RX</div>
+                            <span class="gate-sub">X Rotation</span>
+                        </div>
+                        <div class="gate-draggable" draggable="true" data-gate="RY" title="RY Gate: Parameterized rotation around Y-axis">
+                            <div class="gate-lbl">RY</div>
+                            <span class="gate-sub">Y Rotation</span>
+                        </div>
+                        <div class="gate-draggable" draggable="true" data-gate="RZ" title="RZ Gate: Parameterized rotation around Z-axis">
+                            <div class="gate-lbl">RZ</div>
+                            <span class="gate-sub">Z Rotation</span>
+                        </div>
+                        <div class="gate-draggable" draggable="true" data-gate="MEASURE" title="Measurement: Collapses superposition into classical bits">
+                            <div class="gate-lbl">M</div>
+                            <span class="gate-sub">Measure</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ALGORITHMS LIBRARY -->
+                <div class="card presets-card">
+                    <div class="card-header">
+                        <h2><i class="fa-solid fa-book-open icon-purple"></i> Algorithms Library</h2>
+                        <p class="card-desc">Load standard quantum algorithms</p>
+                    </div>
+                    <div class="preset-dropdown-container">
+                        <select id="select-preset" class="preset-select">
+                            <option value="" disabled selected>Select an algorithm...</option>
+                            <optgroup label="Fundamentals">
+                                <option value="bell">Bell State (Entanglement)</option>
+                                <option value="teleportation">Quantum Teleportation</option>
+                                <option value="superdense">Superdense Coding</option>
+                                <option value="bb84">BB84 Protocol (QKD)</option>
+                            </optgroup>
+                            <optgroup label="Classic Algorithms">
+                                <option value="deutsch_jozsa">Deutsch-Jozsa Algorithm</option>
+                                <option value="bernstein_vazirani">Bernstein-Vazirani Algorithm</option>
+                                <option value="simon">Simon's Algorithm</option>
+                                <option value="grover">Grover's Search Algorithm</option>
+                                <option value="shor">Shor's Factoring Algorithm</option>
+                            </optgroup>
+                            <optgroup label="Mathematical Transforms">
+                                <option value="qft">Quantum Fourier Transform (QFT)</option>
+                                <option value="qpe">Quantum Phase Estimation (QPE)</option>
+                                <option value="hhl">HHL Algorithm (Linear Systems)</option>
+                            </optgroup>
+                            <optgroup label="Variational & Optimization">
+                                <option value="vqe">Variational Quantum Eigensolver (VQE)</option>
+                                <option value="qaoa">Quantum Approx Optimization (QAOA)</option>
+                                <option value="trotter">Trotter-Suzuki Simulation</option>
+                            </optgroup>
+                            <optgroup label="Advanced Protocols">
+                                <option value="walks">Quantum Walks</option>
+                                <option value="amp_amp">Amplitude Amplification</option>
+                                <option value="amp_est">Amplitude Estimation</option>
+                                <option value="counting">Quantum Counting</option>
+                                <option value="annealing">Quantum Annealing</option>
+                                <option value="qabc">Quantum Approx Bayesian Computation</option>
+                                <option value="qsvm">Quantum SVM (QSVM)</option>
+                                <option value="qpca">Quantum PCA (QPCA)</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- QUESTS / CHALLENGES -->
+                <div class="card quests-card">
+                    <div class="card-header">
+                        <h2><i class="fa-solid fa-trophy icon-pink"></i> Sandbox Quests</h2>
+                        <p class="card-desc">Solve these to master quantum basics</p>
+                    </div>
+                    <div class="quest-dropdown-container">
+                        <select id="select-quest" class="preset-select">
+                            <!-- Populated dynamically via JavaScript -->
+                        </select>
+                    </div>
+                    <div class="active-quest-panel" id="active-quest-container">
+                        <!-- Populated dynamically via JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- CENTER & RIGHT PANEL: CIRCUIT BOARD & VISUALIZATION -->
+            <section class="main-content-panel">
+                
+                <!-- TOP WORKSPACE: CIRCUIT BOARD -->
+                <div class="circuit-workspace-card">
+                    <div class="workspace-header">
+                        <div class="workspace-title">
+                            <h2><i class="fa-solid fa-microchip icon-blue"></i> Circuit Board</h2>
+                            <span class="workspace-badge">Drag & Drop Sandbox</span>
+                        </div>
+                        <div class="circuit-tip">
+                            <span><i class="fa-solid fa-circle-info"></i> Click placed gates to delete them</span>
+                        </div>
+                    </div>
+                    <div class="circuit-board-container" id="circuit-board">
+                        <!-- Wires and Grid will be dynamically built by circuit.js -->
+                    </div>
+                </div>
+
+                <!-- BOTTOM GRID: BLOCH SPHERE & STATE ANALSYSIS -->
+                <div class="analysis-grid">
+                    
+                    <!-- BLOCH SPHERE PANEL -->
+                    <div class="card bloch-card">
+                        <div class="card-header flex-header">
+                            <div>
+                                <h2><i class="fa-solid fa-globe icon-blue"></i> Bloch Sphere Monitor</h2>
+                                <p class="card-desc">Drag to rotate. Shows individual qubit state</p>
+                            </div>
+                            <div class="qubit-selector">
+                                <label class="radio-label">
+                                    <input type="radio" name="bloch-qubit" value="0" checked>
+                                    <span>q₀</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="bloch-qubit" value="1">
+                                    <span>q₁</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="bloch-qubit" value="2">
+                                    <span>q₂</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="bloch-canvas-container">
+                            <canvas id="bloch-canvas"></canvas>
+                        </div>
+                        <div class="bloch-coordinates" id="bloch-coords">
+                            <div class="coord-item">X: <span id="coord-x" class="mono-txt">0.00</span></div>
+                            <div class="coord-item">Y: <span id="coord-y" class="mono-txt">0.00</span></div>
+                            <div class="coord-item">Z: <span id="coord-z" class="mono-txt">1.00</span></div>
+                        </div>
+                    </div>
+
+                    <!-- STATE REPRESENTATION (Probabilities & Amplitude Circles) -->
+                    <div class="card statevector-card">
+                        <div class="card-header">
+                            <h2><i class="fa-solid fa-chart-simple icon-purple"></i> Quantum State Vector Analysis</h2>
+                            <p class="card-desc">Amplitude Phasors (height/phase angle) & Measurement Probabilities</p>
+                        </div>
+                        
+                        <!-- Real-time Amplitude Circle Map and Probabilities -->
+                        <div class="quantum-state-grid" id="state-analysis-grid">
+                            <!-- Basis states will be rendered here dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DEVELOPER EXPORT & CODE OUTPUT -->
+                <div class="card code-export-card">
+                    <div class="card-header flex-header">
+                        <div>
+                            <h2><i class="fa-solid fa-code icon-pink"></i> Developer Export</h2>
+                            <p class="card-desc">Real-time compilation of circuit to Qiskit (Python) & OpenQASM</p>
+                        </div>
+                        <div class="tabs">
+                            <button class="tab-btn active" id="tab-qiskit" data-tab="qiskit">Qiskit (Python)</button>
+                            <button class="tab-btn" id="tab-qasm" data-tab="qasm">OpenQASM 2.0</button>
+                            <button class="btn btn-icon" id="btn-copy-code" title="Copy Code">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="code-editor-container">
+                        <textarea id="code-output" spellcheck="false" autocomplete="off" placeholder="# Write code here..."></textarea>
+                    </div>
+                </div>
+
+            </section>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="quantum.js"></script>
+    <script src="bloch.js"></script>
+    <script src="circuit.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

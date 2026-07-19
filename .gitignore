@@ -1,0 +1,6 @@
+.antigravityignore
+.agents/
+node_modules/
+.gemini/
+.system_generated/
+*.log
